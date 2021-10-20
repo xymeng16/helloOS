@@ -1,0 +1,7 @@
+cmake-build-debug/
+*.o
+*.a
+*.bin
+*.elf
+*.map
+*.img
