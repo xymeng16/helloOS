@@ -25,8 +25,6 @@ HELLOOS_BIN = helloOS.bin
 HELLOOS_IMG = helloOS.img
 HELLOOS_QEMUIMG = helloOS-qemu.img
 
-MOUNT_POINT = image/
-
 .PHONY : build clean all link bin update_img qemu unmount
 
 all: build link bin
@@ -59,6 +57,7 @@ $(HELLOOS_QEMUIMG): $(HELLOOS_BIN)
 
 qemu-grub: $(HELLOOS_QEMUIMG)
 	qemu-system-x86_64 -drive format=raw,file=helloOS.img
+
 qemu-kernel: $(HELLOOS_BIN)
 	qemu-system-x86_64 -kernel $(HELLOOS_BIN)
 

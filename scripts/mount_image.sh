@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x # enable ECHO
+#set -x # enable ECHO
 
 IMAGE_NAME=helloOS.img
 MOUNT_POINT="$(pwd)/image/"
@@ -56,7 +56,7 @@ else
 
   sudo grub-editenv $MOUNT_POINT/boot/grub/grubenv set prefix=\(hd0,msdos1\)/boot/grub
 
-  printf "menuentry 'helloOS' {\n set root='hd0,msdos1' \n multiboot2 /helloOS.bin\n boot\n}" | sudo tee $MOUNT_POINT/boot/grub/grub.cfg
+  printf "menuentry 'helloOS' {\n set root='hd0,msdos1' \n multiboot2 /helloOS.bin\n boot\n}\n" | sudo tee $MOUNT_POINT/boot/grub/grub.cfg
 fi
 
 echo "Copy the latest kernel to the image..."
