@@ -1,3 +1,4 @@
+.idea/
 cmake-build-debug/
 *.o
 *.a
@@ -5,3 +6,5 @@ cmake-build-debug/
 *.elf
 *.map
 *.img
+image/
+boot/
