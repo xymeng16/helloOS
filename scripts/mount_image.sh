@@ -27,8 +27,8 @@ function mount_as_loop() {
 function mount_as_drive() {
   if [ -d $MOUNT_POINT ]; then
     sudo rm -rf $MOUNT_POINT
-    mkdir $MOUNT_POINT
   fi
+  mkdir $MOUNT_POINT
   sudo mount $LOOP_PARTITION_NAME $MOUNT_POINT
   echo "$IMAGE_NAME (mapped to $LOOP_DEVICE_NAME:$LOOP_PARTITION_NAME) has successfully been mounted to $MOUNT_POINT"
 }
@@ -45,7 +45,7 @@ else
   else
     echo "$IMAGE_NAME does not exist, create the image (default size: 512M)."
     dd if=/dev/zero of=$IMAGE_NAME bs=1024 count=524288
-    printf "o\nn\np\n1\n\n\nw\n" | sudo fdisk $IMAGE_NAME
+    printf "o\nn\np\n1\n\n\nw\n" | sudo fdisk $IMAGE_NAME > /dev/null
     mount_as_loop
     sudo mkfs.ext4 $LOOP_PARTITION_NAME
     mount_as_drive
@@ -56,13 +56,13 @@ else
 
   sudo grub-editenv $MOUNT_POINT/boot/grub/grubenv set prefix=\(hd0,msdos1\)/boot/grub
 
-  printf "menuentry 'helloOS' {\n set root='hd0,msdos1' \n multiboot2 /helloOS.bin\n boot\n}\n" | sudo tee $MOUNT_POINT/boot/grub/grub.cfg
+  printf "menuentry 'helloOS' {\n set root='hd0,msdos1' \n multiboot2 /helloOS.bin\n boot\n}\n" | sudo tee $MOUNT_POINT/boot/grub/grub.cfg > /dev/null
 fi
 
 echo "Copy the latest kernel to the image..."
 sudo cp helloOS.bin $MOUNT_POINT
 
-# remount to avoid inconsistency
+# avoid inconsistency
 sudo umount $MOUNT_POINT
 sudo mount $LOOP_PARTITION_NAME $MOUNT_POINT
 
