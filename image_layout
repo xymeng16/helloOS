@@ -1,7 +1,0 @@
-label: dos
-label-id: 0x72db7b37
-device: /dev/loop2
-unit: sectors
-sector-size: 512
-
-/dev/loop2p1 : start=        2048, size=     1046528, type=83
